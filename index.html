@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+ 
+   <head>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="drive.js"></script>
+    <script src="game.js"></script>
+    <script src="target.js"></script>
+   </head>
+
+   <body>
+
+    <a-scene id="scene" background="color:blue" inspector-plugin-recast>
+
+
+
+    <a-assets>
+    <a-asset-item id="city" src="assets/low_poly_city/scene.gltf"></a-asset-item>
+    <a-asset-item id="steering" src="assets/steering_wheel/scene.gltf"></a-asset-item>
+    <a-asset-item id="collider" src="assets/navmesh.gltf"></a-asset-item>
+    <img id="acc" src="assets/acc.png"/>
+    <img id="brake" src="assets/break.png"/>
+    </a-assets>
+
+    <a-entity id="environment" environment="preset:forest" target-coin></a-entity>
+
+    <!-- <a-entity id="cityModel" gltf-model="#city" position="10 -2.63 -150" rotation="0 90 0"> </a-entity> -->
+
+    <a-entity id="navigation-mesh" gltf-model="#collider" position="0 1 0" visible="false" nav-mesh></a-entity>
+   
+    <a-entity id="camera-rig" position="0 1 5" rotation="0 0 0" movement-controls="speed:0.5;constrainToNavMesh:true" drive game>
+    <a-entity id="camera" camera position="0 1.6 0" rotation="0 0 0" look-controls="pointerLockEnabled:false">
+       
+        <a-entity id="steeringModel" gltf-model="#steering" position="0.13 -0.12 -0.163" rotation="0 0 0" scale="0.001 0.001 0.001"></a-entity>
+        <a-box id="accImg" src="#acc" position="-0.289 -0.23391 -0.37136" scale="0.05 0.1 0.001" color="gray"></a-box>
+        <a-box id="brakeImg" src="#brake" position="-0.425893 -0.26091 -0.37136" scale="0.05 0.05 0.001" color="gray"></a-box>
+        <a-entity id="timer" position="-0.07 -0.2 -0.3" text="value:00:00;width:1;color:black;align:center;font:kelsonsans"></a-entity>
+    </a-entity>
+   </a-entity> 
+
+    
+      
+   </a-entity>
+
+   <a-entity id="gameOver" position="0 3 0" text="value:Game Over; width:10; color:black; align:center; fornt:kelsonsans" visible="false"></a-entity>
+
+   </a-scene>
+
+   </body>
+
+</html>
